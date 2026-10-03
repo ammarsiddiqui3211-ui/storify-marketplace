@@ -133,7 +133,7 @@ serve(async (req) => {
               You can now access your dedicated seller portal to upload products, view orders, and manage settings.
             </p>
             <div style="text-align: center; margin: 25px 0;">
-              <a href="https://shop.storify.services/seller.html" style="background-color: #4A90E2; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);">Go to Seller Portal</a>
+              <a href="https://shop.storifyco.com/seller.html" style="background-color: #4A90E2; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);">Go to Seller Portal</a>
             </div>
             <div style="margin-top: 30px; text-align: center; font-size: 11px; color: #888888; border-top: 1px solid #e0e0e0; padding-top: 15px;">
               This email was generated automatically by the Storify Shop platform.
@@ -781,7 +781,7 @@ serve(async (req) => {
             </div>
 
             <div style="text-align: center; margin: 25px 0;">
-              <a href="https://shop.storify.services/seller.html" style="background-color: #4A90E2; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);">View Seller Portal</a>
+              <a href="https://shop.storifyco.com/seller.html" style="background-color: #4A90E2; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);">View Seller Portal</a>
             </div>
 
             <div style="margin-top: 30px; text-align: center; font-size: 11px; color: #888888; border-top: 1px solid #e0e0e0; padding-top: 15px;">
@@ -863,7 +863,7 @@ serve(async (req) => {
             </p>
 
             <div style="text-align: center; margin: 25px 0;">
-              <a href="https://shop.storify.services/seller.html" style="background-color: #2e7d32; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);">Go to Seller Portal</a>
+              <a href="https://shop.storifyco.com/seller.html" style="background-color: #2e7d32; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);">Go to Seller Portal</a>
             </div>
 
             <div style="margin-top: 30px; text-align: center; font-size: 11px; color: #888888; border-top: 1px solid #e0e0e0; padding-top: 15px;">
