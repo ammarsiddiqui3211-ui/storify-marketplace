@@ -1,5 +1,5 @@
 {
-  "appId": "services.storify.shop",
+  "appId": "com.storifyco.shop",
   "appName": "Storify Marketplace",
   "webDir": "www",
   "server": {

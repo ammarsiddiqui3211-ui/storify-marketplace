@@ -7,10 +7,10 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "services.storify.shop"
+    namespace "com.storifyco.shop"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "services.storify.shop"
+        applicationId "com.storifyco.shop"
         minSdk = rootProject.ext.minSdkVersion
         targetSdk = rootProject.ext.targetSdkVersion
         versionCode 1

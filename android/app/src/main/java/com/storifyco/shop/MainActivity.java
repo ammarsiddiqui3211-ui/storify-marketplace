@@ -1,4 +1,4 @@
-package services.storify.shop;
+package com.storifyco.shop;
 
 import com.getcapacitor.BridgeActivity;
 
