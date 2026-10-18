@@ -9,6 +9,9 @@ supabase/.temp/
 scratch_diff.txt
 scratch_diff_utf8.txt
 client_secret_*.json
+*.keystore
+*.jks
+android/key.properties
 
 # Node & Build artifacts
 node_modules/

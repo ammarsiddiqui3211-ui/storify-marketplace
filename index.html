@@ -4411,11 +4411,83 @@
             text-align: right;
             max-width: 60%;
         }
-
         .success-actions {
             display: flex;
             flex-direction: column;
             gap: 12px;
+            margin-top: 28px;
+        }
+
+        .continue-shopping-btn,
+        .btn-premium {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: var(--white);
+            border: none;
+            padding: 16px 24px;
+            font-size: 15.5px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 16px var(--accent-glow);
+            letter-spacing: 0.3px;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .continue-shopping-btn:hover,
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--accent-glow);
+            filter: brightness(1.05);
+            color: var(--white);
+        }
+
+        .continue-shopping-btn:active,
+        .btn-premium:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px var(--accent-glow);
+        }
+
+        .continue-shopping-btn svg,
+        .btn-premium svg {
+            transition: transform 0.25s ease;
+        }
+
+        .continue-shopping-btn:hover svg,
+        .btn-premium:hover svg {
+            transform: translateX(-3px);
+        }
+
+        .view-orders-btn {
+            width: 100%;
+            background: var(--white);
+            color: var(--primary);
+            border: 1.5px solid var(--border);
+            padding: 13px 24px;
+            font-size: 14.5px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .view-orders-btn:hover {
+            background: var(--secondary);
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+            color: var(--primary);
         }
 
         .btn-primary-large {
@@ -6963,6 +7035,10 @@
             refreshAccountIfVisible();
         }
 
+        function updateCartUI() {
+            renderCart();
+        }
+
         // Add Product to Cart
         function addToCart(productId, quantity = 1, color = '', size = '') {
             const p = products.find(prod => prod.id === productId);
@@ -9382,8 +9458,8 @@
                     let actionHtml = '';
 
                     if (item.item_status === 'pending_payment') {
-                        statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; background: #fff8e1; color: #b78103;">Pending Payment</span>`;
-                        actionHtml = `<button onclick="simulateSafepayWebhook('${escapeHtml(orderRef)}')" style="padding: 5px 12px; font-size: 11px; font-weight: 500; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 6px; cursor: pointer;">Simulate Payment</button>`;
+                        statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; background: #fff8e1; color: #b78103;">Cash on Delivery</span>`;
+                        actionHtml = `<span style="color:var(--text-light); font-size:12px; font-style:italic;">Awaiting shipment by seller...</span>`;
                     } else if (item.item_status === 'paid_escrow') {
                         statusBadge = `<span style="padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; background: #e3f2fd; color: #0d47a1;">Paid (Escrow)</span>`;
                         actionHtml = `<span style="color:var(--text-light); font-size:12px; font-style:italic;">Awaiting shipment...</span>`;
@@ -9464,8 +9540,8 @@
                     let actionHtml = '';
 
                     if (item.item_status === 'pending_payment') {
-                        statusBadge = `<span style="padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; background: #fff8e1; color: #b78103;">Pending Payment</span>`;
-                        actionHtml = `<button onclick="simulateSafepayWebhook('${escapeHtml(orderRef)}')" style="padding: 5px 12px; font-size: 11px; font-weight: 500; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 6px; cursor: pointer;">Simulate Payment</button>`;
+                        statusBadge = `<span style="padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; background: #fff8e1; color: #b78103;">Cash on Delivery</span>`;
+                        actionHtml = `<span style="color:var(--text-light); font-size:12px; font-style:italic;">Awaiting shipment...</span>`;
                     } else if (item.item_status === 'paid_escrow') {
                         statusBadge = `<span style="padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; background: #e3f2fd; color: #0d47a1;">Paid (Escrow)</span>`;
                     } else if (item.item_status === 'shipped') {
@@ -9530,8 +9606,8 @@
             let actionHtml = '';
 
             if (item.item_status === 'pending_payment') {
-                statusBadge = `<span style="padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; background: #fff8e1; color: #b78103;">Pending Payment</span>`;
-                actionHtml = `<button onclick="simulateSafepayWebhook('${escapeHtml(orderRef)}'); this.closest('.modal').remove();" style="padding: 6px 14px; font-size: 12px; font-weight: 500; background: transparent; border: 1px solid var(--border); color: var(--text); border-radius: 6px; cursor: pointer;">Simulate Payment</button>`;
+                statusBadge = `<span style="padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; background: #fff8e1; color: #b78103;">Cash on Delivery</span>`;
+                actionHtml = `<span style="color:var(--text-light); font-size:12px; font-style:italic;">Awaiting shipment...</span>`;
             } else if (item.item_status === 'paid_escrow') {
                 statusBadge = `<span style="padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; background: #e3f2fd; color: #0d47a1;">Paid (Escrow)</span>`;
             } else if (item.item_status === 'shipped') {
@@ -9675,84 +9751,6 @@
             }
         }
 
-        async function simulateSafepayWebhook(orderRef) {
-            if (!supabaseClient) return;
-            showToast("Simulating Safepay payment webhook...");
-            try {
-                const simRef = 'SIM-REF-' + Math.floor(100000 + Math.random() * 900000);
-
-                // Fetch order details
-                const { data: order } = await supabaseClient
-                    .from('orders')
-                    .select('id, tracker_token')
-                    .eq('order_ref', orderRef)
-                    .single();
-
-                let success = false;
-
-                // 1. Try Edge Function if tracker token present
-                if (order?.tracker_token) {
-                    try {
-                        const response = await fetch(`${SUPABASE_URL}/functions/v1/payment-webhook`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-                            },
-                            body: JSON.stringify({
-                                event: 'payment.succeeded',
-                                data: {
-                                    tracker: order.tracker_token,
-                                    reference: simRef,
-                                    payment: { channel: 'jazzcash' }
-                                }
-                            })
-                        });
-                        if (response.ok) success = true;
-                    } catch (edgeErr) {
-                        console.warn("Edge function simulation bypassed:", edgeErr);
-                    }
-                }
-
-                // 2. Try RPC confirm_payment_via_webhook fallback
-                if (!success) {
-                    const { error: rpcErr } = await supabaseClient.rpc('confirm_payment_via_webhook', {
-                        p_order_ref: orderRef,
-                        p_payment_method: 'jazzcash',
-                        p_payment_reference: simRef
-                    });
-                    if (!rpcErr) {
-                        success = true;
-                    }
-                }
-
-                // 3. Fallback direct update for test environment
-                if (!success && order?.id) {
-                    const { error: orderErr } = await supabaseClient
-                        .from('orders')
-                        .update({ status: 'paid_escrow', payment_method: 'jazzcash', payment_reference: simRef })
-                        .eq('id', order.id);
-
-                    if (!orderErr) {
-                        await supabaseClient
-                            .from('order_items')
-                            .update({ item_status: 'paid_escrow' })
-                            .eq('order_id', order.id);
-                        success = true;
-                    }
-                }
-
-                if (success) {
-                    showToast("Simulated payment settled successfully!");
-                    renderAccountPageView();
-                } else {
-                    showToast("Simulation failed: Unable to update order status");
-                }
-            } catch (err) {
-                console.error("Webhook simulation failed:", err);
-                showToast(`Simulation error: ${err.message}`);
-            }
-        }
         // --- END SELLER DASHBOARD HELPER METHODS ---
 
         // --- USER AVATAR & PROFILE HELPERS ---
@@ -10640,16 +10638,16 @@
                             <div class="form-section-title">Payment Method</div>
                             <div class="payment-methods">
                                 <div class="payment-method-card active">
-                                    <input type="radio" name="payment_method" value="safepay" checked>
+                                    <input type="radio" name="payment_method" value="cod" checked>
                                     <div class="payment-method-text">
-                                        <span class="payment-method-name">Secure Online Checkout (Safepay)</span>
-                                        <span class="payment-method-desc">Pay securely using Credit/Debit Card, JazzCash, or Easypaisa Sandbox.</span>
+                                        <span class="payment-method-name">Cash on Delivery (COD)</span>
+                                        <span class="payment-method-desc">Pay with cash when your parcel is delivered to your doorstep.</span>
                                     </div>
                                 </div>
                             </div>
                             
                             <button type="submit" class="place-order-btn" id="placeOrderBtn">
-                                Proceed to Secure Payment
+                                Place Order (Cash on Delivery)
                             </button>
                         </form>
                     </div>
@@ -10791,6 +10789,7 @@
                         shipping_name: name,
                         shipping_phone: phone,
                         shipping_email: email,
+                        payment_method: 'cod',
                         total_amount: total
                     }])
                     .select()
@@ -10800,7 +10799,7 @@
                     throw new Error(`Order save failed: ${orderError.message}`);
                 }
 
-                btn.innerHTML = `<span class="spinner"></span> Sinking Order Items...`;
+                btn.innerHTML = `<span class="spinner"></span> Saving Order Items...`;
 
                 // 2. Insert individual line items
                 const orderItems = checkoutItems.map(item => ({
@@ -10819,8 +10818,6 @@
                 if (itemsError) {
                     throw new Error(`Order items save failed: ${itemsError.message}`);
                 }
-
-                btn.innerHTML = `<span class="spinner"></span> Securing Checkout...`;
 
                 // Trigger owner email notification for new order in the background
                 try {
@@ -10844,41 +10841,31 @@
                     console.error("Failed to initiate owner notification fetch:", triggerErr);
                 }
 
-                // 3. Call create-checkout-tracker Edge Function
-                const trackerResponse = await fetch(`${SUPABASE_URL}/functions/v1/create-checkout-tracker`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-                    },
-                    body: JSON.stringify({ order_id: dbOrder.id })
-                });
+                btn.innerHTML = `Place Order (Cash on Delivery)`;
+                btn.classList.remove('loading');
 
-                if (!trackerResponse.ok) {
-                    const errorMsg = await trackerResponse.text();
-                    throw new Error(`Edge function error: ${errorMsg}`);
-                }
-
-                const trackerData = await trackerResponse.json();
-                const trackerToken = trackerData?.token;
-
-                if (!trackerToken) {
-                    throw new Error("No payment tracker token received from server");
-                }
-
-                // 4. Redirect to Safepay sandbox checkout screen
-                const safepayRedirectUrl = `https://sandbox.api.getsafepay.com/checkout/pay?env=sandbox&beacon=${trackerToken}&order_id=${orderRef}&source=custom&redirect_url=${encodeURIComponent(window.location.origin + window.location.pathname + '?page=success&ref=' + orderRef)}&cancel_url=${encodeURIComponent(window.location.origin + window.location.pathname + '?page=account')}`;
-
+                // 3. Complete checkout directly for Cash on Delivery
                 if (window.directCheckoutItem) {
                     window.directCheckoutItem = null;
                 } else {
                     cart = [];
                     saveCart();
-                    updateCartUI();
+                    renderCart();
                 }
 
-                showToast("Redirecting to Safepay secure payment...");
-                window.location.href = safepayRedirectUrl;
+                showToast("Order placed successfully with Cash on Delivery!");
+
+                const details = {
+                    orderRef: orderRef,
+                    name: name,
+                    email: email,
+                    address: `${address}, ${city}, ${zip}`,
+                    total: total
+                };
+
+                successDetails = details;
+                displayView('success', null, null, details);
+                navigateToPage('success', { ref: orderRef });
 
             } catch (err) {
                 btn.innerHTML = `Place Order`;
@@ -10897,7 +10884,7 @@
                 <div class="order-success-card">
                     <div class="success-icon-wrapper" style="background: linear-gradient(135deg, var(--accent), #10b981); color:white; box-shadow: 0 4px 15px var(--accent-glow);">✓</div>
                     <h1 class="success-title">Order Confirmed!</h1>
-                    <p class="success-subtitle">Thank you for shopping with us, <strong>${escapeHtml(details.name)}</strong>. Your payment has been successfully secured via Safepay escrow. Funds will be held safely until delivery is confirmed and the return window completes.</p>
+                    <p class="success-subtitle">Thank you for shopping with us, <strong>${escapeHtml(details.name)}</strong>. Your order has been placed with <strong>Cash on Delivery (COD)</strong>. Please have the cash ready when the parcel is delivered to your doorstep.</p>
                     
                     <div class="success-details" style="background: var(--secondary); padding: 20px; border-radius: 10px; margin-top:20px; border: 1px solid var(--border);">
                         <div class="success-details-title" style="font-weight: 700; color: var(--primary); margin-bottom:12px;">Invoice Details</div>
@@ -10912,16 +10899,32 @@
                         </div>
                         <div class="details-row" style="display:flex; justify-content:space-between; margin-bottom: 8px;">
                             <span class="details-label" style="color:var(--text-light);">Payment Method</span>
-                            <span class="details-val" style="font-weight:600; text-transform:uppercase;">Secured Escrow (Safepay)</span>
+                            <span class="details-val" style="font-weight:600; text-transform:uppercase;">Cash on Delivery (COD)</span>
                         </div>
                         <div class="details-row" style="display:flex; justify-content:space-between; border-top:1.5px solid var(--border); padding-top:8px;">
-                            <span class="details-label" style="color:var(--text-light); font-weight:700;">Total Paid</span>
+                            <span class="details-label" style="color:var(--text-light); font-weight:700;">Total Amount</span>
                             <span class="details-val" style="font-weight:800; color:var(--primary); font-size:16px;">${formatPrice(details.total)}</span>
                         </div>
                     </div>
                     
-                    <div class="success-actions" style="margin-top:25px;">
-                        <button class="btn-premium" onclick="navigateToPage('home', {}, true)" style="width:100%; padding:14px; font-weight:700;">Continue Shopping</button>
+                    <div class="success-actions">
+                        <button class="continue-shopping-btn" onclick="navigateToPage('home', {}, true)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                <line x1="3" y1="6" x2="21" y2="6"/>
+                                <path d="M16 10a4 4 0 0 1-8 0"/>
+                            </svg>
+                            <span>Continue Shopping</span>
+                        </button>
+                        <button class="view-orders-btn" onclick="navigateToPage('account', {}, true)">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                            <span>View My Orders</span>
+                        </button>
                     </div>
                 </div>
             `;
@@ -10955,7 +10958,7 @@
                 saveCart();
                 renderCart();
 
-                renderSuccessView(details);
+                displayView('success', null, null, details);
             } catch (err) {
                 console.error("Success fetch exception:", err);
                 navigateToPage('home', {}, true);

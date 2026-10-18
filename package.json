@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node build.js",
     "sync": "npm run build && cap sync android",
-    "open:android": "cap open android"
+    "open:android": "cap open android",
+    "bundle:release": "npm run sync && cd android && gradlew.bat bundleRelease"
   },
   "keywords": [
     "storify",

@@ -2792,10 +2792,10 @@
                                     <div class="landing-feature-icon">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                                     </div>
-                                    <h3>Safepay Escrow Payment Security</h3>
-                                    <p>Never worry about non-paying buyers again. Customer funds are verified and held safely in escrow before you ship. Money is automatically disbursed directly to your bank account upon delivery.</p>
+                                    <h3>Cash on Delivery &amp; Order Protection</h3>
+                                    <p>Sell with confidence across the marketplace. Orders include full customer delivery addresses and direct tracking so you can dispatch parcels seamlessly.</p>
                                 </div>
-                                <div class="landing-feature-pill">100% SECURE • AUTOMATED PAYOUTS</div>
+                                <div class="landing-feature-pill">CASH ON DELIVERY • EASY DISPATCH</div>
                             </div>
 
                             <div class="landing-feature-card">
@@ -4703,7 +4703,7 @@
                 const buyerName = item.orders?.shipping_name || 'N/A';
 
                 let actionBtn = '';
-                if (item.item_status === 'paid_escrow') {
+                if (item.item_status === 'paid_escrow' || item.item_status === 'pending_payment') {
                     actionBtn = `<button class="btn btn-primary" style="padding: 6px 12px; font-size:11px;" onclick="shipOrderItem(${item.id})">Ship Item</button>`;
                 }
 
