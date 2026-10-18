@@ -6900,6 +6900,10 @@
         // PRODUCTS DATABASE (SEED AND FALLBACK)
         // ----------------------------------------------------
         let products = [];
+        try {
+            const cachedProducts = localStorage.getItem('storify_products_cache');
+            if (cachedProducts) products = JSON.parse(cachedProducts);
+        } catch (e) {}
 
         function formatPrice(value, pLoc = null) {
             const amount = Number(value || 0);
@@ -7011,6 +7015,9 @@
                             created_at: item.created_at || null
                         };
                     });
+                    try {
+                        localStorage.setItem('storify_products_cache', JSON.stringify(products));
+                    } catch (e) {}
                 }
             } catch (err) {
                 console.error("Failed to load products from database:", err);
@@ -7520,6 +7527,15 @@
 
         let isInitialPageLoad = true;
         let isRestoringScroll = false;
+        let hasUserScrolled = false;
+
+        ['wheel', 'touchmove', 'pointerdown', 'keydown'].forEach(evt => {
+            window.addEventListener(evt, () => {
+                if (!isRestoringScroll) {
+                    hasUserScrolled = true;
+                }
+            }, { passive: true, capture: true });
+        });
 
         function getScrollStorageKey() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -7531,7 +7547,7 @@
         }
 
         function saveCurrentScrollPosition() {
-            if (isRestoringScroll) return;
+            if (isInitialPageLoad || isRestoringScroll || !hasUserScrolled) return;
             const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             const key = getScrollStorageKey();
             try {
@@ -7556,34 +7572,37 @@
 
             isRestoringScroll = true;
             let attempts = 0;
-            const maxAttempts = 25;
+            const maxAttempts = 35;
 
             function doScroll() {
                 attempts++;
-                const maxScroll = Math.max(
+                const currentDocHeight = Math.max(
                     document.body.scrollHeight,
                     document.documentElement.scrollHeight
-                ) - window.innerHeight;
+                );
+                const maxScroll = currentDocHeight - window.innerHeight;
 
                 const scrollToY = Math.min(targetY, Math.max(0, maxScroll));
-                window.scrollTo({ top: scrollToY, behavior: 'instant' });
+                window.scrollTo(0, scrollToY);
+                document.documentElement.scrollTop = scrollToY;
+                document.body.scrollTop = scrollToY;
 
                 if (maxScroll >= targetY || attempts >= maxAttempts) {
                     setTimeout(() => {
-                        window.scrollTo({ top: scrollToY, behavior: 'instant' });
+                        window.scrollTo(0, scrollToY);
+                        document.documentElement.scrollTop = scrollToY;
+                        document.body.scrollTop = scrollToY;
                         setTimeout(() => {
                             isRestoringScroll = false;
                             isInitialPageLoad = false;
-                        }, 120);
+                        }, 100);
                     }, 50);
                 } else {
-                    setTimeout(doScroll, 60);
+                    setTimeout(doScroll, 50);
                 }
             }
 
-            setTimeout(() => {
-                requestAnimationFrame(doScroll);
-            }, 60);
+            doScroll();
         }
 
         async function displayView(viewName, productId = null, event = null, successDetails = null, searchQuery = '', accountSubPage = 'all') {
@@ -7732,11 +7751,6 @@
                     await renderSellerStoreView(storeName, search, price, sort);
                 }
             }
-
-            // Scroll to top on user navigation
-            if (!isInitialPageLoad) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
         }
 
         // showView Interceptor for backwards-compatibility and programmatic calls
@@ -7819,6 +7833,9 @@
                         history.replaceState({ page, params }, '', newUrl);
                     } else {
                         history.pushState({ page, params }, '', newUrl);
+                    }
+                    if (!isInitialPageLoad) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                 }
             } catch (navErr) {
@@ -11663,6 +11680,12 @@
             const langName = savedLang === 'ur' ? 'Urdu' : 'English';
             selectLanguage(savedLang, langName);
 
+            // Fast initial render from cached products & instant scroll restoration
+            if (products && products.length > 0) {
+                parseUrlAndRender();
+                restoreSavedScrollPosition();
+            }
+
             // Check session and load user profile
             await checkUserSession();
 
@@ -11788,16 +11811,24 @@
             // Persist scroll position across browser sessions & window closing
             let scrollSaveTimer = null;
             window.addEventListener('scroll', () => {
-                if (!isRestoringScroll) {
+                if (!isInitialPageLoad && !isRestoringScroll && hasUserScrolled) {
                     clearTimeout(scrollSaveTimer);
-                    scrollSaveTimer = setTimeout(saveCurrentScrollPosition, 100);
+                    scrollSaveTimer = setTimeout(saveCurrentScrollPosition, 80);
                 }
             }, { passive: true });
 
-            window.addEventListener('beforeunload', saveCurrentScrollPosition);
-            window.addEventListener('pagehide', saveCurrentScrollPosition);
+            window.addEventListener('beforeunload', () => {
+                if (!isInitialPageLoad && !isRestoringScroll && hasUserScrolled) {
+                    saveCurrentScrollPosition();
+                }
+            });
+            window.addEventListener('pagehide', () => {
+                if (!isInitialPageLoad && !isRestoringScroll && hasUserScrolled) {
+                    saveCurrentScrollPosition();
+                }
+            });
             document.addEventListener('visibilitychange', () => {
-                if (document.visibilityState === 'hidden') {
+                if (document.visibilityState === 'hidden' && !isInitialPageLoad && !isRestoringScroll && hasUserScrolled) {
                     saveCurrentScrollPosition();
                 }
             });
