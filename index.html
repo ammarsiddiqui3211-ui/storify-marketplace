@@ -7512,8 +7512,80 @@
         }
 
         // ----------------------------------------------------
-        // DYNAMIC VIEW ROUTER
+        // SCROLL RESTORATION & DYNAMIC VIEW ROUTER
         // ----------------------------------------------------
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        let isInitialPageLoad = true;
+        let isRestoringScroll = false;
+
+        function getScrollStorageKey() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page') || 'home';
+            const category = urlParams.get('category') || 'all';
+            const store = urlParams.get('store') || urlParams.get('seller') || '';
+            const id = urlParams.get('id') || '';
+            return `storify_scroll_${page}_${category}_${store}_${id}`;
+        }
+
+        function saveCurrentScrollPosition() {
+            if (isRestoringScroll) return;
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            const key = getScrollStorageKey();
+            try {
+                localStorage.setItem(key, String(scrollY));
+                localStorage.setItem('storify_last_scroll_key', key);
+                localStorage.setItem('storify_last_scroll_y', String(scrollY));
+            } catch (e) {}
+        }
+
+        function restoreSavedScrollPosition() {
+            const key = getScrollStorageKey();
+            const saved = localStorage.getItem(key) || localStorage.getItem('storify_last_scroll_y');
+            if (!saved) {
+                isInitialPageLoad = false;
+                return;
+            }
+            const targetY = parseInt(saved, 10);
+            if (isNaN(targetY) || targetY <= 20) {
+                isInitialPageLoad = false;
+                return;
+            }
+
+            isRestoringScroll = true;
+            let attempts = 0;
+            const maxAttempts = 25;
+
+            function doScroll() {
+                attempts++;
+                const maxScroll = Math.max(
+                    document.body.scrollHeight,
+                    document.documentElement.scrollHeight
+                ) - window.innerHeight;
+
+                const scrollToY = Math.min(targetY, Math.max(0, maxScroll));
+                window.scrollTo({ top: scrollToY, behavior: 'instant' });
+
+                if (maxScroll >= targetY || attempts >= maxAttempts) {
+                    setTimeout(() => {
+                        window.scrollTo({ top: scrollToY, behavior: 'instant' });
+                        setTimeout(() => {
+                            isRestoringScroll = false;
+                            isInitialPageLoad = false;
+                        }, 120);
+                    }, 50);
+                } else {
+                    setTimeout(doScroll, 60);
+                }
+            }
+
+            setTimeout(() => {
+                requestAnimationFrame(doScroll);
+            }, 60);
+        }
+
         async function displayView(viewName, productId = null, event = null, successDetails = null, searchQuery = '', accountSubPage = 'all') {
             if (event) event.preventDefault();
 
@@ -7562,7 +7634,9 @@
                         accountPageView.style.display = 'block';
                         renderAccountPageView(accountSubPage);
                     }
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    if (!isInitialPageLoad) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
                     return;
                 }
             }
@@ -7659,8 +7733,10 @@
                 }
             }
 
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Scroll to top on user navigation
+            if (!isInitialPageLoad) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
 
         // showView Interceptor for backwards-compatibility and programmatic calls
@@ -11603,6 +11679,9 @@
             renderCart();
             updateAccountNavBtn();
 
+            // Restore scroll position from previous session
+            restoreSavedScrollPosition();
+
             // Update scroll arrows on resize
             window.addEventListener('resize', updateCategoryScrollArrows);
             const catContainer = document.getElementById('categoriesContainer');
@@ -11680,11 +11759,16 @@
                 });
             });
 
-            // Bind all Logo elements to return home
+            // Bind all Logo elements to return home and reset scroll to top
             document.querySelectorAll('.logo').forEach(logo => {
                 logo.addEventListener('click', (e) => {
                     e.preventDefault();
+                    try {
+                        localStorage.setItem(getScrollStorageKey(), '0');
+                        localStorage.setItem('storify_last_scroll_y', '0');
+                    } catch (err) {}
                     showView('home');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             });
 
@@ -11699,6 +11783,23 @@
                         target.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
+            });
+
+            // Persist scroll position across browser sessions & window closing
+            let scrollSaveTimer = null;
+            window.addEventListener('scroll', () => {
+                if (!isRestoringScroll) {
+                    clearTimeout(scrollSaveTimer);
+                    scrollSaveTimer = setTimeout(saveCurrentScrollPosition, 100);
+                }
+            }, { passive: true });
+
+            window.addEventListener('beforeunload', saveCurrentScrollPosition);
+            window.addEventListener('pagehide', saveCurrentScrollPosition);
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'hidden') {
+                    saveCurrentScrollPosition();
+                }
             });
 
             // Smooth, throttled scroll listener to hide ONLY the categories bar (Home, Categories, Deals...) on scroll down while keeping main header sticky
