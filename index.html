@@ -1955,18 +1955,38 @@
             }
 
             /* Categories Navigation */
-            .categories-bar-container {
-                padding: 0 24px;
+            .categories-bar {
+                padding: 0;
             }
 
-            .category-link {
-                padding: 10px 14px;
-                font-size: 13px;
+            .categories-wrapper {
+                width: 100%;
+                position: relative;
             }
 
             .categories {
-                padding: 0 24px;
-                gap: 20px;
+                padding: 8px 58px 8px 24px;
+                gap: 8px;
+                display: flex;
+                align-items: center;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                flex-wrap: nowrap;
+            }
+
+            .categories::-webkit-scrollbar {
+                display: none;
+            }
+
+            .category-link {
+                padding: 6px 14px;
+                font-size: 12px;
+                font-weight: 500;
+                white-space: nowrap;
+                flex-shrink: 0;
+                border-radius: 50px;
+                line-height: 1.4;
             }
 
             /* Hero Banner - Optimized for 768px height viewports */
@@ -2365,7 +2385,7 @@
             }
 
             .categories {
-                padding: 10px 16px;
+                padding: 8px 48px 8px 16px;
                 gap: 8px;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
@@ -8694,6 +8714,17 @@
                 rightBtn.classList.remove('visible');
             }
         }
+
+        // Attach listeners for responsive category scroll arrows
+        window.addEventListener('resize', updateCategoryScrollArrows, { passive: true });
+        window.addEventListener('orientationchange', updateCategoryScrollArrows, { passive: true });
+        document.addEventListener('DOMContentLoaded', () => {
+            const catScrollBox = document.getElementById('categoriesContainer');
+            if (catScrollBox) {
+                catScrollBox.addEventListener('scroll', updateCategoryScrollArrows, { passive: true });
+            }
+            updateCategoryScrollArrows();
+        });
 
         // Category Filtering from Navigation
         function filterCategory(catKey, event) {
