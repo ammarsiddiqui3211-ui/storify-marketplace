@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Privacy Policy | Storify Marketplace</title>
+    <meta name="description"
+        content="Read the Privacy Policy for Storify Marketplace. Understand how we collect, protect, and handle your data on our web and mobile apps.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://shop.storifyco.com/privacy">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shop.storifyco.com/privacy">
+    <meta property="og:title" content="Privacy Policy | Storify Marketplace">
+    <meta property="og:description"
+        content="Learn how Storify Marketplace protects your privacy, personal information, and data security.">
+    <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="images/favicon/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script defer src="/_vercel/insights/script.js"></script>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #f8fafc;
+            --accent: #4A90E2;
+            --accent-dark: #357ABD;
+            --accent-light: #6BA8F0;
+            --accent-glow: rgba(74, 144, 226, 0.12);
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --card-bg: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 20px -2px rgba(30, 41, 59, 0.08);
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            background: var(--secondary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Navigation Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-link img {
+            height: 38px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-btn {
+            background: var(--accent);
+            color: #ffffff !important;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s ease, transform 0.1s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Header */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #162447 100%);
+            color: #ffffff;
+            padding: 60px 24px 50px;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(74, 144, 226, 0.2);
+            color: #93c5fd;
+            border: 1px solid rgba(147, 197, 253, 0.3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .effective-date {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Main Content Layout */
+        .content-container {
+            max-width: 1000px;
+            margin: 40px auto 80px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 36px;
+            align-items: start;
+        }
+
+        /* Sidebar Navigation */
+        .toc-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 90px;
+        }
+
+        .toc-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            margin-bottom: 14px;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toc-list a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .toc-list a:hover {
+            background: var(--accent-glow);
+            color: var(--accent-dark);
+            transform: translateX(3px);
+        }
+
+        /* Article / Policy Content */
+        .policy-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px 48px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .policy-section {
+            margin-bottom: 40px;
+            scroll-margin-top: 100px;
+        }
+
+        .policy-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .policy-section h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.3px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 8px;
+        }
+
+        .policy-section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 20px 0 10px;
+        }
+
+        .policy-section p {
+            margin-bottom: 14px;
+            color: #334155;
+            font-size: 0.98rem;
+        }
+
+        .policy-section ul {
+            margin: 10px 0 18px 24px;
+            color: #334155;
+        }
+
+        .policy-section li {
+            margin-bottom: 8px;
+            font-size: 0.98rem;
+        }
+
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--accent);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+            font-size: 0.95rem;
+            color: #1e3a8a;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .contact-box a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111827;
+            color: #9ca3af;
+            padding: 48px 24px 24px;
+            border-top: 1px solid #1f2937;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 28px;
+        }
+
+        .footer-logo img {
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+
+            .toc-card {
+                position: static;
+            }
+
+            .policy-card {
+                padding: 28px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo/header.png" alt="Storify Marketplace">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Shop</a>
+                <a href="seller.html">Become a Seller</a>
+                <a href="index.html" class="nav-btn">Open App</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <span class="hero-badge">Transparency & Security</span>
+            <h1>Privacy Policy</h1>
+            <p>At Storify Marketplace, your privacy and trust are our top priorities. Read below to understand how we safeguard your personal data.</p>
+            <div class="effective-date">Last Updated: October 2026 | Effective Date: October 1, 2026</div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <!-- Table of Contents Sidebar -->
+        <aside class="toc-card">
+            <div class="toc-title">Table of Contents</div>
+            <ul class="toc-list">
+                <li><a href="#introduction">1. Introduction</a></li>
+                <li><a href="#information-we-collect">2. Information We Collect</a></li>
+                <li><a href="#how-we-use-information">3. How We Use Information</a></li>
+                <li><a href="#permissions">4. Device & App Permissions</a></li>
+                <li><a href="#sharing-disclosure">5. Sharing & Disclosures</a></li>
+                <li><a href="#security">6. Data Security & Escrow</a></li>
+                <li><a href="#cookies">7. Cookies & Local Storage</a></li>
+                <li><a href="#retention-deletion">8. Data Retention & Deletion</a></li>
+                <li><a href="#children">9. Children's Privacy</a></li>
+                <li><a href="#contact">10. Contact Us</a></li>
+            </ul>
+        </aside>
+
+        <!-- Policy Content Card -->
+        <main class="policy-card">
+
+            <section id="introduction" class="policy-section">
+                <h2>1. Introduction</h2>
+                <p>Welcome to <strong>Storify Marketplace</strong> ("Storify", "we", "our", or "us"), available on web at <code>https://shop.storifyco.com</code> and through our official Android application (Package: <code>com.storifyco.shop</code>).</p>
+                <p>This Privacy Policy explains how we collect, store, utilize, and protect your information when you browse our marketplace, register an account, purchase products, or sell items as a verified vendor.</p>
+                <div class="highlight-box">
+                    <strong>Our Promise:</strong> We never sell your personal data to third parties. We collect only what is strictly necessary to process your transactions, coordinate deliveries, protect buyer and seller escrow, and secure your account.
+                </div>
+            </section>
+
+            <section id="information-we-collect" class="policy-section">
+                <h2>2. Information We Collect</h2>
+                <p>Depending on whether you use Storify as a buyer, a visitor, or an authorized seller, we collect the following categories of information:</p>
+
+                <h3>A. Information You Provide to Us</h3>
+                <ul>
+                    <li><strong>Account Credentials:</strong> Full name, email address, phone number, and encrypted password authentication via Supabase Auth.</li>
+                    <li><strong>Shipping & Delivery Details:</strong> Recipient name, street address, city, province/state, postal code, and delivery notes.</li>
+                    <li><strong>Order Details:</strong> Items purchased, transaction totals, reference IDs, payment method selected (such as Cash on Delivery, Escrow, Bank Transfer, or mobile wallets).</li>
+                    <li><strong>Seller Application & Verification Data:</strong> Store name, business location, identity/CNIC verification details, bank account/Easypaisa/JazzCash details for payouts, and product catalog media.</li>
+                    <li><strong>Communications:</strong> Customer inquiries, dispute resolution messages, and support feedback.</li>
+                </ul>
+
+                <h3>B. Information Collected Automatically</h3>
+                <ul>
+                    <li><strong>Device & Connection Information:</strong> Device model, operating system version, browser type, IP address, and general network geolocation.</li>
+                    <li><strong>Usage Analytics:</strong> Pages visited, products searched, and interaction metrics used exclusively for site reliability and performance optimization via privacy-respecting analytics.</li>
+                </ul>
+            </section>
+
+            <section id="how-we-use-information" class="policy-section">
+                <h2>3. How We Use Your Information</h2>
+                <p>We use collected data solely for legitimate business and transactional operations:</p>
+                <ul>
+                    <li>To facilitate seamless browsing, product search, cart checkout, and order fulfillment.</li>
+                    <li>To operate our buyer and seller escrow protection system, ensuring fair payments and valid dispute resolution.</li>
+                    <li>To notify you about order confirmations, tracking numbers, and seller portal status via automated email and push alerts.</li>
+                    <li>To verify seller credentials and prevent fraudulent listings, unauthorized payments, or abuse.</li>
+                    <li>To maintain performance, resolve bugs, and enforce our marketplace Terms of Service.</li>
+                </ul>
+            </section>
+
+            <section id="permissions" class="policy-section">
+                <h2>4. Device & App Permissions (Android)</h2>
+                <p>When using our mobile application on Android devices, we may request certain system permissions:</p>
+                <ul>
+                    <li><strong>Camera / Photo Library:</strong> Used only when you choose to take or upload product photos, store logos, or buyer dispute evidence. Never accessed in the background without user initiation.</li>
+                    <li><strong>Storage / Media:</strong> Required to cache web assets for fast offline performance and save downloaded receipts.</li>
+                    <li><strong>Push Notifications:</strong> Used with your consent to notify you regarding order status, shipment tracking, and important security alerts.</li>
+                </ul>
+            </section>
+
+            <section id="sharing-disclosure" class="policy-section">
+                <h2>5. Sharing & Third-Party Disclosures</h2>
+                <p>We do not share your information with third-party advertisers. Information is disclosed solely in the following operational scenarios:</p>
+                <ul>
+                    <li><strong>Logistics & Courier Partners:</strong> Your shipping address and contact number are provided to trusted delivery partners exclusively to deliver your orders.</li>
+                    <li><strong>Verified Vendors:</strong> Sellers receive order details and destination addresses necessary to pack and dispatch purchased items.</li>
+                    <li><strong>Cloud Infrastructure Providers:</strong> We use industry-standard enterprise cloud platforms (Supabase for encrypted database storage and authentication; Vercel for hosting delivery; Resend for transactional emails).</li>
+                    <li><strong>Legal & Fraud Protection:</strong> Where required by applicable law, court order, or to protect the safety, escrow integrity, and property of Storify Marketplace users.</li>
+                </ul>
+            </section>
+
+            <section id="security" class="policy-section">
+                <h2>6. Data Security & Escrow Protection</h2>
+                <p>We employ multi-layer security measures to keep your data safe:</p>
+                <ul>
+                    <li><strong>Encryption in Transit & at Rest:</strong> All traffic between your device and Storify servers is encrypted via TLS 1.3 / SSL. Database records are protected by strong database encryption.</li>
+                    <li><strong>Strict Row-Level Security (RLS):</strong> Our database policies strictly restrict database reads and writes so users can only access their authorized records.</li>
+                    <li><strong>No Plaintext Passwords:</strong> Account passwords are cryptographic hashes managed securely by Supabase Authentication.</li>
+                </ul>
+            </section>
+
+            <section id="cookies" class="policy-section">
+                <h2>7. Cookies & Local Storage</h2>
+                <p>We utilize browser cookies and <code>localStorage</code> strictly for functional purposes:</p>
+                <ul>
+                    <li>Maintaining your active login session and authentication tokens.</li>
+                    <li>Saving cart items and localized currency or category preferences.</li>
+                    <li>Enabling the Service Worker offline cache for smooth PWA and mobile performance.</li>
+                </ul>
+                <p>You can adjust your browser settings to decline cookies; however, some marketplace features (like maintaining an active shopping cart or seller dashboard) may require them.</p>
+            </section>
+
+            <section id="retention-deletion" class="policy-section">
+                <h2>8. Data Retention & Account Deletion</h2>
+                <p>We retain your personal data for as long as your account remains active or as needed to comply with statutory accounting and tax regulations.</p>
+                <p><strong>Your Rights:</strong> You have the right to request access to your stored personal data, request corrections, or request complete account and data deletion at any time by emailing us at <a href="mailto:storify.store.co@gmail.com">storify.store.co@gmail.com</a>. Upon verification, your account and associated personal data will be promptly removed from our active systems.</p>
+            </section>
+
+            <section id="children" class="policy-section">
+                <h2>9. Children's Privacy</h2>
+                <p>Storify Marketplace is intended for general audiences aged 18 and older (or minors with parental supervision). We do not knowingly collect personal identifiable information from children under the age of 13.</p>
+            </section>
+
+            <section id="contact" class="policy-section">
+                <h2>10. Contact Us</h2>
+                <p>If you have any questions, feedback, or data privacy requests regarding this Privacy Policy, please contact our privacy compliance team:</p>
+                <div class="contact-box">
+                    <p><strong>Storify Marketplace</strong></p>
+                    <p>Official Website: <a href="https://shop.storifyco.com" target="_blank" rel="noopener">https://shop.storifyco.com</a></p>
+                    <p>Privacy & Support Email: <a href="mailto:storify.store.co@gmail.com">storify.store.co@gmail.com</a></p>
+                    <p>Operating Region: Pakistan & Global</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="images/logo/footer.png" alt="Storify Marketplace">
+                </div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="seller.html">Sell on Storify</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="mailto:storify.store.co@gmail.com">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Storify Marketplace. All rights reserved. Crafted with excellence.
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

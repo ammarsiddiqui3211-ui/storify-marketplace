@@ -18,6 +18,7 @@ const filesToCopy = [
   'manifest.json',
   'sw.js',
   'mobile-app.js',
+  'privacy.html',
   'sitemap.xml',
   '.htaccess'
 ];

@@ -5,6 +5,7 @@
   "rewrites": [
     { "source": "/seller", "destination": "/seller.html" },
     { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/diagnostics", "destination": "/diagnostics.html" }
+    { "source": "/diagnostics", "destination": "/diagnostics.html" },
+    { "source": "/privacy", "destination": "/privacy.html" }
   ]
 }
