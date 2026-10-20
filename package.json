@@ -1,9 +1,11 @@
 {
   "name": "storify-marketplace",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Storify Marketplace - Dual Web & Android Application",
   "main": "index.html",
   "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "npx serve -l 3000 .",
     "build": "node build.js",
     "sync": "npm run build && cap sync android",
     "open:android": "cap open android",
