@@ -1,6 +1,6 @@
 {
   "name": "storify-marketplace",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Storify Marketplace - Dual Web & Android Application",
   "main": "index.html",
   "scripts": {

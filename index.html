@@ -964,15 +964,28 @@
             padding: 0 32px;
         }
 
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 390px;
+            gap: 16px;
+            align-items: stretch;
+        }
+
+        .hero-layout.no-banners {
+            grid-template-columns: 1fr;
+        }
+
         .hero-banner {
             background: var(--white);
             border-radius: 18px;
             position: relative;
             overflow: hidden;
             color: var(--white);
-            aspect-ratio: 16 / 7;
-            min-height: 260px;
+            aspect-ratio: 16 / 7.2;
+            min-height: 280px;
             max-height: 420px;
+            height: 100%;
+            width: 100%;
             border: 1px solid rgba(0, 0, 0, 0.08);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
             padding: 0;
@@ -980,6 +993,306 @@
 
         .hero-banner::before {
             content: none;
+        }
+
+        /* Hero Right-Side Categories Grid (Direct tiles fitting the space - No enclosing box) */
+        .hero-categories-side {
+            height: 100%;
+            min-height: 0;
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .hero-categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 12px;
+            height: 100%;
+            min-height: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero-categories-grid .category-card {
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: flex-end;
+            padding: 12px 14px;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+        }
+
+        .hero-categories-grid .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16), 0 0 0 1.5px var(--accent);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-categories-grid .category-card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 0.45s ease;
+        }
+
+        .hero-categories-grid .category-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .hero-categories-grid .category-card-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.15) 0%, rgba(15, 23, 42, 0.82) 100%);
+            opacity: 0.9;
+            transition: opacity 0.25s ease, background 0.25s ease;
+        }
+
+        .hero-categories-grid .category-card:hover .category-card-overlay {
+            opacity: 0.96;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.9) 100%);
+        }
+
+        .hero-categories-grid .category-card-content {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 6px;
+        }
+
+        .hero-categories-grid .category-card-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .hero-categories-grid .category-card-title {
+            color: #ffffff;
+            font-size: 13.5px;
+            font-weight: 400;
+            line-height: 1.25;
+            letter-spacing: -0.1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+            display: block;
+        }
+
+        .hero-categories-grid .category-card-subtitle {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+        }
+
+        .hero-categories-grid .category-card-icon {
+            color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(4px);
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+
+        .hero-categories-grid .category-card:hover .category-card-icon {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #ffffff;
+            transform: scale(1.12);
+        }
+
+        .hero-categories-grid .category-card-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* 6th Slot: View All Categories Card */
+        .hero-categories-grid .category-card-view-all {
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2563eb 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.22);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 14px 16px;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+        }
+
+        .hero-categories-grid .category-card-view-all:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 26px rgba(37, 99, 235, 0.38), 0 0 0 1.5px #60a5fa;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-categories-grid .category-card-view-all .view-all-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .hero-categories-grid .category-card-view-all .view-all-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: transform 0.3s ease, background 0.25s ease;
+        }
+
+        .hero-categories-grid .category-card-view-all:hover .view-all-badge {
+            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-categories-grid .category-card-view-all .view-all-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .hero-categories-grid .category-card-view-all .view-all-arrow {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .hero-categories-grid .category-card-view-all:hover .view-all-arrow {
+            transform: translateX(4px);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-categories-grid .category-card-view-all .view-all-arrow svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .hero-categories-grid .category-card-view-all .view-all-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .hero-categories-grid .category-card-view-all .view-all-title {
+            color: #ffffff;
+            font-size: 13.5px;
+            font-weight: 500;
+            line-height: 1.25;
+            letter-spacing: -0.1px;
+        }
+
+        .hero-categories-grid .category-card-view-all .view-all-subtitle {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-layout {
+                grid-template-columns: minmax(0, 1fr) 320px;
+                gap: 12px;
+            }
+
+            .hero-categories-grid {
+                gap: 10px;
+            }
+
+            .hero-categories-grid .category-card {
+                padding: 10px 10px;
+            }
+
+            .hero-categories-grid .category-card-title {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 880px) {
+            .hero-layout {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .hero-banner {
+                aspect-ratio: 16 / 8.5;
+                min-height: 180px;
+                max-height: 280px;
+            }
+
+            .hero-categories-side {
+                height: auto;
+            }
+
+            .hero-categories-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+                gap: 10px;
+                height: auto;
+            }
+
+            .hero-categories-grid .category-card {
+                height: 95px;
+                min-height: 95px;
+            }
+
+            .hero-categories-grid .category-card-view-all {
+                height: 95px;
+                min-height: 95px;
+            }
         }
 
         .hero-content {
@@ -1888,6 +2201,7 @@
 
         /* Responsive - Tablet & 1024x768 Resolution */
         @media (max-width: 1024px) {
+
             /* Header & Navigation */
             .nav-container {
                 padding: 0 24px;
@@ -4686,6 +5000,7 @@
             text-align: right;
             max-width: 60%;
         }
+
         .success-actions {
             display: flex;
             flex-direction: column;
@@ -5799,7 +6114,7 @@
         .category-card-title {
             color: var(--white);
             font-size: 17px;
-            font-weight: 500;
+            font-weight: 400;
             letter-spacing: -0.4px;
             line-height: 1.2;
             max-width: 145px;
@@ -6523,23 +6838,33 @@
 
     <!-- Hero -->
     <section class="hero" id="hero-section">
-        <div class="hero-banner">
-            <div class="hero-slider" id="heroSlider">
-                <!-- Dynamically populated from Admin Panel Banners -->
-            </div>
-            <div class="hero-controls" aria-label="Banner slider controls">
-                <button class="hero-arrow" type="button" onclick="changeHeroSlide(-1)"
-                    aria-label="Previous banner">&#10094;</button>
-                <div class="hero-dots">
-                    <button class="hero-dot active" type="button" onclick="setHeroSlide(0)"
-                        aria-label="Show banner 1"></button>
-                    <button class="hero-dot" type="button" onclick="setHeroSlide(1)"
-                        aria-label="Show banner 2"></button>
-                    <button class="hero-dot" type="button" onclick="setHeroSlide(2)"
-                        aria-label="Show banner 3"></button>
+        <div class="hero-layout" id="heroLayout">
+            <!-- Left Banner Slider -->
+            <div class="hero-banner">
+                <div class="hero-slider" id="heroSlider">
+                    <!-- Dynamically populated from Admin Panel Banners -->
                 </div>
-                <button class="hero-arrow" type="button" onclick="changeHeroSlide(1)"
-                    aria-label="Next banner">&#10095;</button>
+                <div class="hero-controls" aria-label="Banner slider controls">
+                    <button class="hero-arrow" type="button" onclick="changeHeroSlide(-1)"
+                        aria-label="Previous banner">&#10094;</button>
+                    <div class="hero-dots">
+                        <button class="hero-dot active" type="button" onclick="setHeroSlide(0)"
+                            aria-label="Show banner 1"></button>
+                        <button class="hero-dot" type="button" onclick="setHeroSlide(1)"
+                            aria-label="Show banner 2"></button>
+                        <button class="hero-dot" type="button" onclick="setHeroSlide(2)"
+                            aria-label="Show banner 3"></button>
+                    </div>
+                    <button class="hero-arrow" type="button" onclick="changeHeroSlide(1)"
+                        aria-label="Next banner">&#10095;</button>
+                </div>
+            </div>
+
+            <!-- Right Categories Grid (Direct tiles fitting the space - No enclosing box) -->
+            <div class="hero-categories-side graphic-categories-section" id="graphicCategoriesSection">
+                <div class="hero-categories-grid" id="homeGraphicCategoriesList">
+                    <!-- Dynamically populated: 5 categories + 1 View All Categories card -->
+                </div>
             </div>
         </div>
     </section>
@@ -6548,15 +6873,6 @@
     <main class="container">
         <!-- Home View -->
         <div id="home-view" class="fade-in">
-            <!-- Shop By Category Cards Section -->
-            <div class="graphic-categories-section" id="graphicCategoriesSection">
-                <h2 class="section-title">Categories</h2>
-                <div class="graphic-categories-list" id="homeGraphicCategoriesList">
-                    <!-- Dynamically populated from appCategories -->
-                </div>
-            </div>
-
-
             <!-- Dynamic Products Container -->
             <div id="productsContainer"></div>
 
@@ -6926,7 +7242,7 @@
         try {
             const cachedProducts = localStorage.getItem('storify_products_cache');
             if (cachedProducts) products = JSON.parse(cachedProducts);
-        } catch (e) {}
+        } catch (e) { }
 
         function formatPrice(value, pLoc = null) {
             const amount = Number(value || 0);
@@ -7040,7 +7356,7 @@
                     });
                     try {
                         localStorage.setItem('storify_products_cache', JSON.stringify(products));
-                    } catch (e) {}
+                    } catch (e) { }
                 }
             } catch (err) {
                 console.error("Failed to load products from database:", err);
@@ -7577,7 +7893,7 @@
                 localStorage.setItem(key, String(scrollY));
                 localStorage.setItem('storify_last_scroll_key', key);
                 localStorage.setItem('storify_last_scroll_y', String(scrollY));
-            } catch (e) {}
+            } catch (e) { }
         }
 
         function restoreSavedScrollPosition() {
@@ -8579,14 +8895,19 @@
         function renderHeroSlider() {
             const heroSection = document.getElementById('hero-section');
             const slider = document.getElementById('heroSlider');
+            const bannerEl = document.querySelector('.hero-banner');
+            const heroLayout = document.getElementById('heroLayout');
             const controls = document.querySelector('.hero-controls');
 
             if (!appBanners || appBanners.length === 0) {
-                if (heroSection) heroSection.style.display = 'none';
+                if (bannerEl) bannerEl.style.display = 'none';
+                if (heroLayout) heroLayout.classList.add('no-banners');
                 return;
             }
 
-            if (heroSection) heroSection.style.display = 'block';
+            if (bannerEl) bannerEl.style.display = '';
+            if (heroLayout) heroLayout.classList.remove('no-banners');
+            if (heroSection) heroSection.style.display = '';
 
             if (slider) {
                 slider.innerHTML = appBanners.map((b, idx) => `
@@ -8645,12 +8966,10 @@
         }
 
         function renderAllCategoriesPage() {
-            const containers = [
-                document.getElementById('graphicCategoriesList'),
-                document.getElementById('homeGraphicCategoriesList')
-            ].filter(Boolean);
+            const allCatContainer = document.getElementById('graphicCategoriesList');
+            const homeHeroCatContainer = document.getElementById('homeGraphicCategoriesList');
 
-            if (containers.length === 0) return;
+            if (!allCatContainer && !homeHeroCatContainer) return;
 
             const categoryImagesMap = {
                 'all-products': 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop&q=60',
@@ -8679,9 +8998,7 @@
             function getCategoryPhoto(c) {
                 if (c.image_url) return c.image_url;
                 const slug = String(c.slug || c.name || '').toLowerCase();
-
                 if (categoryImagesMap[slug]) return categoryImagesMap[slug];
-
                 if (slug.includes('toy') || slug.includes('game')) return 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=500&auto=format&fit=crop&q=60';
                 if (slug.includes('book') || slug.includes('read')) return 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=500&auto=format&fit=crop&q=60';
                 if (slug.includes('groc') || slug.includes('food')) return 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60';
@@ -8690,54 +9007,92 @@
                 if (slug.includes('pet')) return 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500&auto=format&fit=crop&q=60';
                 if (slug.includes('health') || slug.includes('well')) return 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&auto=format&fit=crop&q=60';
                 if (slug.includes('station') || slug.includes('office')) return 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500&auto=format&fit=crop&q=60';
-
                 return defaultImg;
             }
 
-            let html = `
-                <a href="#" class="category-card" data-category="all-products" onclick="goToAllProducts(event)">
-                    <img src="${categoryImagesMap['all-products']}" alt="All Products">
-                    <div class="category-card-overlay"></div>
-                    <div class="category-card-content">
-                        <div class="category-card-text">
-                            <span class="category-card-title">All Products</span>
-                            <span class="category-card-subtitle">Browse Everything</span>
-                        </div>
-                        <span class="category-card-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
-                        </span>
-                    </div>
-                </a>
-            `;
+            function buildCardHtml(c) {
+                const imgSrc = getCategoryPhoto(c);
+                const subText = (c.subcategories && c.subcategories.length > 0)
+                    ? `${c.subcategories.length} Subcategories`
+                    : 'Explore Category';
 
-            if (appCategories && appCategories.length > 0) {
-                html += appCategories.map(c => {
-                    const imgSrc = getCategoryPhoto(c);
-                    const subText = (c.subcategories && c.subcategories.length > 0)
-                        ? `${c.subcategories.length} Subcategories`
-                        : 'Explore Category';
-
-                    return `
-                        <a href="#" class="category-card" data-category="${escapeHtml(c.slug)}" onclick="filterCategory('${escapeHtml(c.slug)}', event)">
-                            <img src="${imgSrc}" alt="${escapeHtml(c.name)}">
-                            <div class="category-card-overlay"></div>
-                            <div class="category-card-content">
-                                <div class="category-card-text">
-                                    <span class="category-card-title">${escapeHtml(c.name)}</span>
-                                    <span class="category-card-subtitle">${escapeHtml(subText)}</span>
-                                </div>
-                                <span class="category-card-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 1 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                                </span>
+                return `
+                    <a href="#" class="category-card" data-category="${escapeHtml(c.slug)}" onclick="filterCategory('${escapeHtml(c.slug)}', event)">
+                        <img src="${imgSrc}" alt="${escapeHtml(c.name)}">
+                        <div class="category-card-overlay"></div>
+                        <div class="category-card-content">
+                            <div class="category-card-text">
+                                <span class="category-card-title">${escapeHtml(c.name)}</span>
+                                <span class="category-card-subtitle">${escapeHtml(subText)}</span>
                             </div>
-                        </a>
-                    `;
-                }).join('');
+                            <span class="category-card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 1 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            </span>
+                        </div>
+                    </a>
+                `;
             }
 
-            containers.forEach(el => {
-                el.innerHTML = html;
-            });
+            // 1. POPULATE HERO RIGHT-SIDE GRID (Fits exactly into the space: 5 categories + 1 View All button)
+            if (homeHeroCatContainer) {
+                const heroCategories = (appCategories && appCategories.length > 0)
+                    ? appCategories.slice(0, 5)
+                    : [];
+
+                let heroCardsHtml = heroCategories.map(c => buildCardHtml(c)).join('');
+
+                // 6th item: "View All Categories" Card / Button
+                heroCardsHtml += `
+                    <a href="#" class="category-card-view-all" onclick="goToAllCategories(event)" role="button" aria-label="View All Categories">
+                        <div class="view-all-top">
+                            <span class="view-all-badge">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+                                    <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+                                    <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                                    <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+                                </svg>
+                            </span>
+                            <span class="view-all-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="view-all-bottom">
+                            <span class="view-all-title">View All Categories</span>
+                            <span class="view-all-subtitle">Browse full catalog &rarr;</span>
+                        </div>
+                    </a>
+                `;
+
+                homeHeroCatContainer.innerHTML = heroCardsHtml;
+            }
+
+            // 2. POPULATE ALL CATEGORIES PAGE (Full catalog with all categories + All Products card)
+            if (allCatContainer) {
+                let fullCatalogHtml = `
+                    <a href="#" class="category-card" data-category="all-products" onclick="goToAllProducts(event)">
+                        <img src="${categoryImagesMap['all-products']}" alt="All Products">
+                        <div class="category-card-overlay"></div>
+                        <div class="category-card-content">
+                            <div class="category-card-text">
+                                <span class="category-card-title">All Products</span>
+                                <span class="category-card-subtitle">Browse Everything</span>
+                            </div>
+                            <span class="category-card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                            </span>
+                        </div>
+                    </a>
+                `;
+
+                if (appCategories && appCategories.length > 0) {
+                    fullCatalogHtml += appCategories.map(c => buildCardHtml(c)).join('');
+                }
+
+                allCatContainer.innerHTML = fullCatalogHtml;
+            }
         }
 
         function rebuildCategoryBars() {
@@ -11812,7 +12167,7 @@
                     try {
                         localStorage.setItem(getScrollStorageKey(), '0');
                         localStorage.setItem('storify_last_scroll_y', '0');
-                    } catch (err) {}
+                    } catch (err) { }
                     showView('home');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
